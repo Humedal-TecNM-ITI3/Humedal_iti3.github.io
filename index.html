@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Humedal ITI3 - Instituto Tecnológico de Iztapalapa 3</title>
+    <title>Humedal ITI3</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -75,26 +75,9 @@
             align-items: center;
         }
         
-        .logo-icon {
-            width: 50px;
+        .logo img {
             height: 50px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             margin-right: 15px;
-            transition: var(--transition);
-        }
-        
-        .logo:hover .logo-icon {
-            transform: rotate(15deg) scale(1.1);
-        }
-        
-        .logo-icon span {
-            color: white;
-            font-weight: bold;
-            font-size: 1.1rem;
         }
         
         .logo-text h1 {
@@ -110,16 +93,21 @@
             font-weight: 300;
         }
         
-        nav ul {
+        /* Menú unificado */
+        .main-nav {
+            display: flex;
+        }
+        
+        .nav-links {
             display: flex;
             list-style: none;
         }
         
-        nav ul li {
+        .nav-links li {
             margin-left: 25px;
         }
         
-        nav ul li a {
+        .nav-links li a {
             color: var(--text-color);
             text-decoration: none;
             font-weight: 500;
@@ -129,7 +117,7 @@
             padding: 5px 0;
         }
         
-        nav ul li a::after {
+        .nav-links li a::after {
             content: '';
             position: absolute;
             bottom: 0;
@@ -140,24 +128,38 @@
             transition: var(--transition);
         }
         
-        nav ul li a:hover {
+        .nav-links li a:hover {
             color: var(--primary-color);
         }
         
-        nav ul li a:hover::after {
+        .nav-links li a:hover::after {
             width: 100%;
         }
         
-        .mobile-menu {
+        .mobile-menu-btn {
             display: none;
             font-size: 1.5rem;
             cursor: pointer;
             color: var(--primary-color);
+            background: none;
+            border: none;
+        }
+        
+        .close-menu {
+            display: none;
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+            background: none;
+            border: none;
         }
         
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('img/hero.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -555,15 +557,11 @@
                 font-size: 2.5rem;
             }
             
-            nav ul {
-                display: none;
-            }
-            
-            .mobile-menu {
+            .mobile-menu-btn {
                 display: block;
             }
             
-            .mobile-nav {
+            .main-nav {
                 position: fixed;
                 top: 0;
                 right: -100%;
@@ -574,43 +572,35 @@
                 z-index: 1001;
                 transition: var(--transition);
                 padding: 80px 30px 30px;
+                flex-direction: column;
             }
             
-            .mobile-nav.active {
+            .main-nav.active {
                 right: 0;
             }
             
-            .mobile-nav ul {
-                list-style: none;
+            .nav-links {
+                flex-direction: column;
+                width: 100%;
             }
             
-            .mobile-nav ul li {
-                margin-bottom: 20px;
+            .nav-links li {
+                margin: 0 0 20px 0;
             }
             
-            .mobile-nav ul li a {
-                color: var(--text-color);
-                text-decoration: none;
-                font-weight: 500;
-                font-size: 1.1rem;
-                transition: var(--transition);
+            .nav-links li a {
                 display: block;
                 padding: 10px 0;
                 border-bottom: 1px solid #f0f0f0;
+                font-size: 1.1rem;
             }
             
-            .mobile-nav ul li a:hover {
-                color: var(--primary-color);
+            .nav-links li a:hover {
                 padding-left: 10px;
             }
             
             .close-menu {
-                position: absolute;
-                top: 25px;
-                right: 25px;
-                font-size: 1.5rem;
-                cursor: pointer;
-                color: var(--primary-color);
+                display: block;
             }
         }
         
@@ -639,16 +629,19 @@
         <div class="container">
             <div class="header-content">
                 <div class="logo">
-                    <div class="logo-icon">
-                        <span>ITI3</span>
-                    </div>
+                    <img src="img/logotec.png   " alt="Logo ITI3">
                     <div class="logo-text">
                         <h1>Instituto Tecnológico de Iztapalapa 3</h1>
                         <p>Humedal Educativo</p>
                     </div>
                 </div>
-                <nav class="desktop-nav">
-                    <ul>
+                
+                <!-- Menú unificado -->
+                <nav class="main-nav" id="mainNav">
+                    <button class="close-menu" id="closeMenu">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <ul class="nav-links">
                         <li><a href="#inicio">Inicio</a></li>
                         <li><a href="#acerca">Acerca</a></li>
                         <li><a href="#beneficios">Beneficios</a></li>
@@ -656,26 +649,13 @@
                         <li><a href="#ubicacion">Ubicación</a></li>
                     </ul>
                 </nav>
-                <div class="mobile-menu">
+                
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
                     <i class="fas fa-bars"></i>
-                </div>
+                </button>
             </div>
         </div>
     </header>
-
-    <!-- Mobile Navigation -->
-    <div class="mobile-nav">
-        <div class="close-menu">
-            <i class="fas fa-times"></i>
-        </div>
-        <ul>
-            <li><a href="#inicio">Inicio</a></li>
-            <li><a href="#acerca">Acerca del Humedal</a></li>
-            <li><a href="#beneficios">Beneficios</a></li>
-            <li><a href="#galeria">Galería</a></li>
-            <li><a href="#ubicacion">Ubicación</a></li>
-        </ul>
-    </div>
 
     <!-- Hero Section -->
     <section id="inicio" class="hero">
@@ -756,22 +736,22 @@
             </div>
             <div class="gallery-grid">
                 <div class="gallery-item fade-in">
-                    <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Planificación del humedal">
+                    <img src="img/galeria1.jpeg" alt="Planificación del humedal">
                 </div>
                 <div class="gallery-item fade-in">
-                    <img src="https://images.unsplash.com/photo-1589556183033-81289d578779?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Trabajos de construcción">
+                    <img src="img/galeria2.jpeg" alt="Trabajos de construcción">
                 </div>
                 <div class="gallery-item fade-in">
-                    <img src="https://images.unsplash.com/photo-1566228015668-4c45dbc6e2f8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Plantación de especies nativas">
+                    <img src="img/galeria3.jpeg" alt="Plantación de especies nativas">
                 </div>
                 <div class="gallery-item fade-in">
-                    <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Estudiantes participando">
+                    <img src="img/galeria4.jpeg" alt="Estudiantes participando">
                 </div>
                 <div class="gallery-item fade-in">
-                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Primeras especies visitantes">
+                    <img src="img/galeria5.jpeg" alt="Primeras especies visitantes">
                 </div>
                 <div class="gallery-item fade-in">
-                    <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Vista aérea del humedal">
+                    <img src="img/galeria6.jpeg" alt="Vista aérea del humedal">
                 </div>
             </div>
         </div>
@@ -798,7 +778,7 @@
                     </div>
                 </div>
                 <div class="location-map fade-in">
-                    <iframe src="https://www.google.com/maps/place/TecNM+Campus+Iztapalapa+III/@19.3363968,-98.9790208,14z/data=!4m6!3m5!1s0x85ce1d66790d48ab:0x511207a1a7a61918!8m2!3d19.3363652!4d-98.9852138!16s%2Fg%2F11y2337bb?entry=ttu&g_ep=EgoyMDI1MDkyOC4wIKXMDSoASAFQAw%3D%3D" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe src="https://maps.app.goo.gl/yasNF5viocbYe2VQ8" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
         </div>
@@ -851,23 +831,23 @@
         });
 
         // Mobile menu toggle
-        const mobileMenuBtn = document.querySelector('.mobile-menu');
-        const closeMenuBtn = document.querySelector('.close-menu');
-        const mobileNav = document.querySelector('.mobile-nav');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const closeMenuBtn = document.getElementById('closeMenu');
+        const mainNav = document.getElementById('mainNav');
         
         mobileMenuBtn.addEventListener('click', function() {
-            mobileNav.classList.add('active');
+            mainNav.classList.add('active');
         });
         
         closeMenuBtn.addEventListener('click', function() {
-            mobileNav.classList.remove('active');
+            mainNav.classList.remove('active');
         });
 
         // Close mobile menu when clicking on a link
-        const mobileLinks = document.querySelectorAll('.mobile-nav a');
-        mobileLinks.forEach(link => {
+        const navLinks = document.querySelectorAll('.nav-links a');
+        navLinks.forEach(link => {
             link.addEventListener('click', function() {
-                mobileNav.classList.remove('active');
+                mainNav.classList.remove('active');
             });
         });
 
